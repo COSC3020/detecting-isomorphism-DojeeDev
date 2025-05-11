@@ -46,6 +46,7 @@ function perm(a) {
 }
 
 // generates permuted graph based on index list so it knows what to swap
+// Asked chatgpt how to permute a 2d array based on an array of numbers
 function permGraph(g, p) {
   const n = p.length;
   const pg = Array.from({ length: n }, () => Array(n).fill(0));
