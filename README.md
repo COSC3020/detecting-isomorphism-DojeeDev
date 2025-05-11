@@ -18,8 +18,9 @@ What is the worst-case big $\Theta$ time complexity of your algorithm?
 
 ### Analysis
 
-We generate all permutations of the adj matrix which is $(|V|^2)!$. Then we have another $(|V|^2)!$ for running through our list of permutations. Giving us $2 \cdot(|V|^2)! \in \Theta((|V|^2)!)$
+We generate all permutations of the indices which is $|V|!$ Then for each permutation we use it to move the rows and columns of one of the graphs to check against the other one. This takes $|V|^2$ time. We also generate an array of the indices the graph which is an extra separate $|V|$.
 
+This gives us $|V| + |V|! + |V|^2 \cdot |V|!  = |V| + |V|!(1+|V|^2) \in \Theta(|V| + |V|^2 \cdot |V|!)$.
 
 I certify that I have listed all sources used to complete this exercise, including the use of any Large Language Models. All of the work is my own, except where stated otherwise. I am aware that plagiarism carries severe penalties and that if plagiarism is suspected, charges may be filed against me without prior notice.
 

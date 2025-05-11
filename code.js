@@ -3,19 +3,23 @@ function are_isomorphic(g1, g2) {
 
   var n = g2.length;
 
-  var gFlatPerms = perm(g2.flat());
+  var indexArr = [];
+  for (var i = 0; i < n; i++) { indexArr.push(i); }
 
-  var gPerms = [];
+  // var gFlatPerms = perm(g2.flat());
 
-  for (p of gFlatPerms) {
-    var newP = [];
-    while(p.length) newP.push(p.splice(0, n));
-    gPerms.push(newP);
-  }
+  var indexPerms = perm(indexArr);
+
+  // for (p of gFlatPerms) {
+  //   var newP = [];
+  //   while(p.length) newP.push(p.splice(0, n));
+  //   gPerms.push(newP);
+  // }
 
   var gJSON = JSON.stringify(g1);
-  for (g of gPerms) {
-    if (JSON.stringify(g) == gJSON) { return true; }
+  for (p of indexPerms) {
+    const pg = permGraph(g2, p);
+    if (JSON.stringify(pg) == gJSON) { return true; }
   }
   return false;
 }
@@ -41,3 +45,16 @@ function perm(a) {
   return result;
 }
 
+// generates permuted graph based on index list so it knows what to swap
+function permGraph(g, p) {
+  const n = p.length;
+  const pg = Array.from({ length: n }, () => Array(n).fill(0));
+
+  for (var i = 0; i < n; i++) {
+    for (var j = 0; j < n; j++) {
+      pg[i][j] = g[p[i]][p[j]];
+    }
+  }
+
+  return pg;
+}
